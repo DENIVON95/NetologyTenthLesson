@@ -1,29 +1,33 @@
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@Data
 public class Radio {
+    private int numberOfStations = 10;
     private int currentStation;
     private int currentVolume;
 
-    public int getCurrentStation() {
-      return currentStation;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
+    public Radio (int numberOfStations){
+        this.numberOfStations = numberOfStations;
     }
 
     public void setCurrentStation(int stationNumber) {
-        if (stationNumber >= 0 && stationNumber < 10) {
+        if (stationNumber >= 0 && stationNumber < numberOfStations) {
             currentStation = stationNumber;
         }
     }
 
     public void setCurrentVolume(int volumeLevel) {
-        if (volumeLevel >= 0 && volumeLevel <= 10) {
+        if (volumeLevel >= 0 && volumeLevel <= 100) {
             currentVolume = volumeLevel;
         }
     }
 
     public void nextStation() {
-        if (currentStation == 9) {
+        if (currentStation == numberOfStations - 1) {
             currentStation = 0;
         } else {
             currentStation++;
@@ -32,14 +36,14 @@ public class Radio {
 
     public void prevStation() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = numberOfStations - 1;
         } else {
             currentStation--;
         }
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < 100) {
             currentVolume++;
         }
     }
